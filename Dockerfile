@@ -61,7 +61,6 @@ RUN wget https://github.com/maxbube/mydumper/releases/download/v0.9.5/mydumper_0
 ADD ./files/mysqlScripts /mysqlScripts
 
 RUN chmod u+x \
-      /MySQLTuner-perl/*.sh \
       /MySQLTuner-perl/*.pl \
       /mysqlScripts/*.sh \
       /mysqlScripts/*.pl \
