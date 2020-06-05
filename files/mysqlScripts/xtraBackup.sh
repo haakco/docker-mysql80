@@ -26,7 +26,6 @@ mkdir -p "${BACKUP_DIR}"
 xtrabackup \
   -u ${USERNAME} \
   -p${PASSWORD} \
-  --host 127.0.0.1 \
   --backup \
   --parallel=8 \
   --target-dir="${BACKUP_DIR_DATE}"

@@ -35,14 +35,13 @@ RUN apt-get update && \
 RUN wget https://repo.percona.com/apt/percona-release_latest.generic_all.deb \
     -O /percona-release.deb && \
   dpkg -i /percona-release.deb && \
-  percona-release enable tools && \
-  percona-release enable original && \
+  percona-release enable-only tools release && \
   apt-get update && \
   apt-get dist-upgrade -y && \
   apt-get install  -y \
     percona-toolkit \
     qpress \
-    percona-xtrabackup-24 \
+    percona-xtrabackup-80 \
     && \
   rm -rf /percona-release.deb && \
   apt-get -y autoremove && \
