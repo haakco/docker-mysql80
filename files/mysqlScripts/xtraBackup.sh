@@ -19,7 +19,7 @@ mkdir -p "${BACKUP_DIR}"
 BACKUP_DIR_DATE="${BACKUP_DIR}/${DATE}"
 BACKUP_TAR_XZ_FILE_NAME="${BACKUP_DIR}/${DATE}.xtrbk.tar.xz"
 
-/bin/rm -rf "${BACKUP_DIR:?}}"/* || echo 0
+/bin/rm -rf "${BACKUP_DIR_DATE:?}}"/* || echo 0
 
 mkdir -p "${BACKUP_DIR}"
 
@@ -32,7 +32,7 @@ xtrabackup \
 
 xtrabackup --prepare --target-dir="${BACKUP_DIR_DATE}"
 
-tar -cpvf - "${BACKUP_DIR_DATE}" |
-     xz -z -c -T6 -6 > "${BACKUP_TAR_XZ_FILE_NAME}"
+tar -C "${BACKUP_DIR_DATE}" -cpvf - "${BACKUP_DIR_DATE}" |
+     xz -z -c -T4 -9 -e > "${BACKUP_TAR_XZ_FILE_NAME}"
 
 rm -rf "${BACKUP_DIR_DATE}"
