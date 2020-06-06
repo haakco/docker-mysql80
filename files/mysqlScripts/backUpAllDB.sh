@@ -12,13 +12,13 @@ else
   PASSWORD="${MYSQL_PWD}"
 fi
 
-BACKUP_DIR=/backup
+BACKUP_DIR=/backup/all
 BACKUP_FILE=$(date +"%Y%m%d%H%M")
 
-rm -rf "${BACKUP_DIR:?}/"
+rm -rf "${BACKUP_DIR:?}/*"
+mkidr -p "${BACKUP_DIR}"
 
 /usr/bin/mysqldump \
-  -h 127.0.0.1 \
   -u ${USERNAME} \
   -p${PASSWORD} \
   --lock-tables \
