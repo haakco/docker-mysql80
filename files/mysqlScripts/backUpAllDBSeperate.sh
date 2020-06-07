@@ -28,15 +28,19 @@ DB_NAMES=$(\
 for DB_NAME in ${DB_NAMES}; do
     BACKUP_FILE_NAME="${BACKUP_DIR}/${BACKUP_DATE}.${DB_NAME}.sql.xz"
 
-    echo /usr/bin/mysqldump \
+    /usr/bin/mysqldump \
       -u "${USERNAME}" \
       "-p${PASSWORD}" \
+      --databases \
       --add-locks \
       --opt \
       --complete-insert \
       --extended-insert \
       --single-transaction \
       --force \
+      --events \
+      --routines \
+      --triggers \
       --add-drop-database \
       --default-character-set=utf8mb4 "${DB_NAME}" | \
         xz -z -c -T0 -9e > "${BACKUP_FILE_NAME}"
