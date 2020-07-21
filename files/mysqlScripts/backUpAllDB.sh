@@ -30,4 +30,4 @@ mkidr -p "${BACKUP_DIR}"
   --force \
   --add-drop-database \
   --all-databases \
-  --default-character-set=utf8mb4 | xz -z -c -T6 -6 > "${BACKUP_DIR}"/"${BACKUP_FILE}".sql.xz
+  --default-character-set=utf8mb4 | xz -z -c -T1 -6 > "${BACKUP_DIR}"/"${BACKUP_FILE}".sql.xz

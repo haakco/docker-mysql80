@@ -43,7 +43,7 @@ for DB_NAME in ${DB_NAMES}; do
       --triggers \
       --add-drop-database \
       --default-character-set=utf8mb4 "${DB_NAME}" | \
-        xz -z -c -T0 -9e > "${BACKUP_FILE_NAME}"
+        xz -z -c -T1 -6 > "${BACKUP_FILE_NAME}"
 
     echo "Backedup ${DB_NAME} to ${BACKUP_FILE_NAME}"
     sleep 5

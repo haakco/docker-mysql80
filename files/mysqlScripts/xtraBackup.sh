@@ -33,6 +33,6 @@ xtrabackup \
 xtrabackup --prepare --target-dir="${BACKUP_DIR_DATE}"
 
 tar -C "${BACKUP_DIR_DATE}" -cpvf - "${BACKUP_DIR_DATE}" |
-     xz -z -c -T4 -9 -e > "${BACKUP_TAR_XZ_FILE_NAME}"
+     xz -z -c -T1 -6 > "${BACKUP_TAR_XZ_FILE_NAME}"
 
 rm -rf "${BACKUP_DIR_DATE}"
