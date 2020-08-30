@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 if [ -z "${USER}" ]
 then
-  echo -n "MySQL username: " ; read -r USERNAME
+  echo -n "MySQL username: " ; read -r DB_USERNAME
 else
-    USERNAME="${USER}"
+    DB_USERNAME="${USER}"
 fi
 if [ -z "${MYSQL_PWD}" ]
 then
@@ -24,7 +24,7 @@ BACKUP_TAR_XZ_FILE_NAME="${BACKUP_DIR}/${DATE}.xtrbk.tar.xz"
 mkdir -p "${BACKUP_DIR}"
 
 xtrabackup \
-  -u ${USERNAME} \
+  -u ${DB_USERNAME} \
   -p${PASSWORD} \
   --backup \
   --parallel=8 \

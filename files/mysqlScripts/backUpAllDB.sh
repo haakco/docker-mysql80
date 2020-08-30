@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -z "${USER}" ]
 then
-  echo -n "MySQL username: " ; read -r USERNAME
+  echo -n "MySQL username: " ; read -r DB_USERNAME
 else
-    USERNAME="${USER}"
+    DB_USERNAME="${USER}"
 fi
 if [ -z "${MYSQL_PWD}" ]
 then
@@ -19,7 +19,7 @@ rm -rf "${BACKUP_DIR:?}/*"
 mkidr -p "${BACKUP_DIR}"
 
 /usr/bin/mysqldump \
-  -u ${USERNAME} \
+  -u ${DB_USERNAME} \
   -p${PASSWORD} \
   --lock-tables \
   --complete-insert \

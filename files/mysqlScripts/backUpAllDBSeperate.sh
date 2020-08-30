@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -z "${USER}" ]
 then
-  echo -n "MySQL username: " ; read -r USERNAME
+  echo -n "MySQL username: " ; read -r DB_USERNAME
 else
-    USERNAME="${USER}"
+    DB_USERNAME="${USER}"
 fi
 if [ -z "${MYSQL_PWD}" ]
 then
@@ -21,7 +21,7 @@ rm -rf "${BACKUP_DIR:?}/*"
 mkdir -p "${BACKUP_DIR}"
 
 DB_NAMES=$(\
-    mysql -s -r -u ${USERNAME}  -p${PASSWORD} -e 'show databases' -N | \
+    mysql -s -r -u ${DB_USERNAME}  -p${PASSWORD} -e 'show databases' -N | \
     grep -Ev "^(mysql|performance_schema|information_schema|sys)$"\
     )
 
@@ -29,7 +29,7 @@ for DB_NAME in ${DB_NAMES}; do
     BACKUP_FILE_NAME="${BACKUP_DIR}/${BACKUP_DATE}.${DB_NAME}.sql.xz"
 
     /usr/bin/mysqldump \
-      -u "${USERNAME}" \
+      -u "${DB_USERNAME}" \
       "-p${PASSWORD}" \
       --databases \
       --add-locks \

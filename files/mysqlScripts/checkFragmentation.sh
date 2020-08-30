@@ -1,9 +1,9 @@
 #!/bin/bash
 if [ -z "${USER}" ]
 then
-  echo -n "MySQL username: " ; read -r USERNAME
+  echo -n "MySQL username: " ; read -r DB_USERNAME
 else
-    USERNAME="${USER}"
+    DB_USERNAME="${USER}"
 fi
 if [ -z "${MYSQL_PWD}" ]
 then
@@ -13,8 +13,8 @@ else
 fi
 
 export OPTIMIZE="";
-mysql -u "${USERNAME}" -p"${PASSWORD}" -NBe "SHOW DATABASES;" | grep -v 'lost+found' | while read database ; do
-  mysql -h 127.0.0.1 -u "${USERNAME}" -p"${PASSWORD}" -NBe "SHOW TABLE STATUS;" $database | while read name engine version rowformat rows avgrowlength datalength maxdatalength indexlength datafree autoincrement createtime updatetime checktime collation checksum createoptions comment ; do
+mysql -u "${DB_USERNAME}" -p"${PASSWORD}" -NBe "SHOW DATABASES;" | grep -v 'lost+found' | while read database ; do
+  mysql -h 127.0.0.1 -u "${DB_USERNAME}" -p"${PASSWORD}" -NBe "SHOW TABLE STATUS;" $database | while read name engine version rowformat rows avgrowlength datalength maxdatalength indexlength datafree autoincrement createtime updatetime checktime collation checksum createoptions comment ; do
     if [ "$datafree" -gt 0 ] ; then
       fragmentation=$(($datafree * 100 / $datalength))
       echo "$database.$name is $fragmentation% fragmented"
@@ -23,7 +23,7 @@ mysql -u "${USERNAME}" -p"${PASSWORD}" -NBe "SHOW DATABASES;" | grep -v 'lost+fo
 #      echo -n "Should we optimize [y/n]: " ; read checkOptimize ; stty echo ; echo
 #      if [ "${checkOptimize}" = "y" ]
 #      then
-#        mysql -u "${USERNAME}" -p"${PASSWORD}" -NBe "OPTIMIZE TABLE $name;" "$database"
+#        mysql -u "${DB_USERNAME}" -p"${PASSWORD}" -NBe "OPTIMIZE TABLE $name;" "$database"
 #      fi
     fi
   done
