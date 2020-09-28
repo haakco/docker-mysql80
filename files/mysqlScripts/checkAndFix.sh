@@ -12,7 +12,8 @@ else
   PASSWORD="${MYSQL_PWD}"
 fi
 
-mysqlcheck -h 127.0.0.1 --all-databases --check --auto-repair --force -u "${DB_USERNAME}" -p"${PASSWORD}"
-mysqlcheck -h 127.0.0.1 --all-databases --optimize --force -u "${DB_USERNAME}" -p"${PASSWORD}"
+mysqlcheck --all-databases --check --auto-repair --extended --force -u "${DB_USERNAME}" -p"${PASSWORD}"
+mysqlcheck --all-databases --optimize -u "${DB_USERNAME}" -p"${PASSWORD}"
+mysqlcheck --all-databases --analyze -u "${DB_USERNAME}" -p"${PASSWORD}"
 
 #find /var/lib/mysql -name '*.MYI' -exec myisamchk --silent --fast '{}' \;
