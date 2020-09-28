@@ -1,4 +1,4 @@
-FROM mysql:8.0
+FROM mysql:8
 
 ENV LANG="en_US.UTF-8" \
     LC_ALL="C.UTF-8" \
