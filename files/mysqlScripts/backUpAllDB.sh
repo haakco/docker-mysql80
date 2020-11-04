@@ -16,7 +16,7 @@ BACKUP_DIR=/backup/all
 BACKUP_FILE=$(date +"%Y%m%d%H%M")
 
 rm -rf "${BACKUP_DIR:?}/*"
-mkidr -p "${BACKUP_DIR}"
+mkdir -p "${BACKUP_DIR}"
 
 /usr/bin/mysqldump \
   -u ${DB_USERNAME} \
